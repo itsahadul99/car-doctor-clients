@@ -20,7 +20,7 @@ const Services = () => {
             <div className="my-5 md:my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 justify-center items-center">
                 {
                     services.map(service => <div key={service._id}>
-                        <div className="card w-96 border rounded-lg">
+                        <div className="card md:w-96 border rounded-lg">
                             <figure className="p-5 ">
                                 <img className="w-[300px] h-[250px] rounded-md" src={service.img} alt={service.title}/>
                             </figure>
@@ -36,6 +36,9 @@ const Services = () => {
                         </div>
                     </div>)
                 }
+            </div>
+            <div className="flex justify-center mb-5">
+            <button className=" px-1 md:px-3 py-2 border border-[#FF3811] text-[#FF3811] rounded-md font-semibold mt-5">More Services</button>
             </div>
         </div>
     );
