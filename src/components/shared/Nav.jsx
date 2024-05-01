@@ -53,6 +53,26 @@ const Nav = () => {
                 Contact
             </NavLink>
         </li>
+        <li>
+            <NavLink to="/login"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
+                        : "font-bold "
+                }>
+                Log In
+            </NavLink>
+        </li>
+        <li>
+            <NavLink to="/signin"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
+                        : "font-bold "
+                }>
+                Sign In
+            </NavLink>
+        </li>
     </>
     return (
         <div className="navbar bg-base-100 my-5">
