@@ -4,6 +4,8 @@ import Banner from "../components/Banner";
 import Services from "../components/Services";
 import { FaLocationPin } from "react-icons/fa6";
 import PopularProduct from "../components/PopularProduct";
+import OurTeam from "../components/OurTeam";
+import CoreFeature from "../components/CoreFeature";
 const Home = () => {
     return (
         <div>
@@ -34,6 +36,8 @@ const Home = () => {
                 </div>
             </div>
             <PopularProduct />
+            <OurTeam />
+            <CoreFeature />
         </div>
     );
 };
