@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import login from '../assets/images/login/login.svg';
 
 const Login = () => {
     const {Login} = useContext(AuthContext)
+    const location = useLocation()
     const navigate = useNavigate()
     const handleLogin = e => {
         e.preventDefault()
@@ -20,7 +21,7 @@ const Login = () => {
                 icon: 'success',
                 confirmButtonText: 'Ok'
               })
-            navigate('/')
+            navigate(location?.state ? location?.state : '/')
         })
         .catch(error => {
             Swal.fire({

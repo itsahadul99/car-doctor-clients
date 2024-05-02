@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
@@ -6,9 +7,15 @@ import { FaArrowRight } from "react-icons/fa";
 const Services = () => {
     const [services, setServices] = useState([])
     useEffect(() => {
-        fetch('./services.json')
-            .then(res => res.json())
-            .then(data => setServices(data))
+        // fetch('./services.json')
+        //     .then(res => res.json())
+        //     .then(data => setServices(data))
+
+        // using axios 
+        axios.get('http://localhost:5000/services')
+        .then(data => {
+            setServices(data.data)
+        })
     }, [])
     return (
         <div>

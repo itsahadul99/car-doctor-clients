@@ -1,7 +1,32 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/logo.svg'
 import { FaSearch } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 const Nav = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {
+            Swal.fire({
+                title: 'Successfully Logged in !',
+                text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              })
+            navigate('/')
+        })
+        .catch(error => {
+            Swal.fire({
+                title: `${error.message}`,
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              })
+        })
+    }
     const links = <>
         <li>
             <NavLink to="/"
@@ -53,26 +78,19 @@ const Nav = () => {
                 Contact
             </NavLink>
         </li>
-        <li>
-            <NavLink to="/login"
-                className={({ isActive }) =>
-                    isActive
-                        ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
-                        : "font-bold "
-                }>
-                Log In
-            </NavLink>
-        </li>
-        <li>
-            <NavLink to="/signin"
-                className={({ isActive }) =>
-                    isActive
-                        ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
-                        : "font-bold "
-                }>
-                Sign In
-            </NavLink>
-        </li>
+        {
+            user ? <button onClick={handleLogOut} className="btn btn-sm">Log Out</button>
+                : <li>
+                    <NavLink to="/login"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
+                                : "font-bold "
+                        }>
+                        Log In
+                    </NavLink>
+                </li>
+        }
     </>
     return (
         <div className="navbar bg-base-100 my-5">
@@ -98,7 +116,7 @@ const Nav = () => {
             </div>
             <div className="navbar-end">
                 <div className="flex justify-center items-center gap-5">
-                    <FaSearch size={20}/>
+                    <FaSearch size={20} />
                     <button className="px-3 py-2 border-2 border-[#FF3811] font-semibold text-lg text-[#FF3811] rounded-md">Appointment</button>
                 </div>
             </div>
