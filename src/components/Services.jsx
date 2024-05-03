@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 /* eslint-disable react/no-unescaped-entities */
 const Services = () => {
@@ -13,9 +14,9 @@ const Services = () => {
 
         // using axios 
         axios.get('http://localhost:5000/services')
-        .then(data => {
-            setServices(data.data)
-        })
+            .then(data => {
+                setServices(data.data)
+            })
     }, [])
     return (
         <div>
@@ -29,7 +30,7 @@ const Services = () => {
                     services.map(service => <div key={service._id}>
                         <div className="card md:w-96 border rounded-lg">
                             <figure className="p-5 ">
-                                <img className="w-[300px] h-[250px] rounded-md" src={service.img} alt={service.title}/>
+                                <img className="w-[300px] h-[250px] rounded-md" src={service.img} alt={service.title} />
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">
@@ -37,7 +38,9 @@ const Services = () => {
                                 </h2>
                                 <div className="flex justify-between items-center text-[#FF3811]">
                                     <p className="text-sm md:text-lg font-semibold">Price: ${service.price}</p>
-                                    <FaArrowRight />
+                                    <Link to={`/serviceDetails/${service._id}`}>
+                                        <FaArrowRight />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +48,7 @@ const Services = () => {
                 }
             </div>
             <div className="flex justify-center mb-5">
-            <button className=" px-1 md:px-3 py-2 border border-[#FF3811] text-[#FF3811] rounded-md font-semibold mt-5">More Services</button>
+                <button className=" px-1 md:px-3 py-2 border border-[#FF3811] text-[#FF3811] rounded-md font-semibold mt-5">More Services</button>
             </div>
         </div>
     );
