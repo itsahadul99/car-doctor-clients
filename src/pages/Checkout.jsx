@@ -1,19 +1,27 @@
 import axios from 'axios';
 import img5 from '../assets/images/banner/5.jpg';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
 const Checkout = () => {
+    const data = useLoaderData();
+    const {user} = useContext(AuthContext)
     const navigate = useNavigate()
     const handleOrder = e => {
         e.preventDefault()
         const form = e.target;
         const firstName = form.first_name.value;
         const lastName = form.last_name.value;
-        const name = firstName + ' ' + lastName;
+        const name = firstName + '' + lastName;
         const phone = form.phone.value;
-        const email = form.email.value;
+        const email = user.email;
+        const date = form.date.value;
         const message = form.message.value;
-        const order = { name, phone, email, message }
+        const img = data.img;
+        const serviceName = data.title;
+        const price = data.price;
+        const order = { customerName: name, phone, email, message, img, serviceName, date, price }
         // console.log(order);
         Swal.fire({
             title: "Are you sure?",
@@ -60,7 +68,7 @@ const Checkout = () => {
                             <input type="text" name="phone" placeholder='Your Phone' className='px-5 py-3 bg-white rounded-md font-semibold w-full' />
                         </div>
                         <div className='w-full'>
-                            <input type="email" name="email" placeholder='Your Email' className='px-5 py-3 bg-white rounded-md font-semibold w-full' />
+                            <input type="date" name="date" className='px-5 py-3 bg-white rounded-md font-semibold w-full' />
                         </div>
                         <div className='w-full col-span-2'>
                             <textarea name="message" placeholder='Your Message' className='px-5 py-3 bg-white rounded-md font-semibold w-full h-40' />

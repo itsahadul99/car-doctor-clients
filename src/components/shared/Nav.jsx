@@ -49,16 +49,16 @@ const Nav = () => {
             </NavLink>
         </li>
         <li>
-            <NavLink to="/services"
+            <NavLink to="/booking"
                 className={({ isActive }) =>
                     isActive
                         ? "text-[#FF3811] pb-1 border-b-0 lg:border-b-2 border-red-600 font-bold"
                         : "font-bold "
                 }>
-                Services
+                My Booking List
             </NavLink>
         </li>
-        <li>
+        {/* <li>
             <NavLink to="/blog"
                 className={({ isActive }) =>
                     isActive
@@ -67,8 +67,8 @@ const Nav = () => {
                 }>
                 Blog
             </NavLink>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
             <NavLink to="/contact"
                 className={({ isActive }) =>
                     isActive
@@ -77,7 +77,7 @@ const Nav = () => {
                 }>
                 Contact
             </NavLink>
-        </li>
+        </li> */}
         {
             user ? <button onClick={handleLogOut} className="btn btn-sm">Log Out</button>
                 : <li>

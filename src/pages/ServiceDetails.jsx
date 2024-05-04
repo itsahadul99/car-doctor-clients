@@ -17,7 +17,7 @@ const ServiceDetails = () => {
             setLoadedData(data)
         }
         getData()
-    }, [])
+    }, [id])
     return (
         <div>
             <div className='relative'>
@@ -117,7 +117,7 @@ const ServiceDetails = () => {
                         </div>
                         <div className='space-y-3'>
                             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold'>Price: ${loadedData.price}</h1>
-                            <Link to={`/checkout`}><button className='px-5 w-full rounded-md text-white py-2 bg-[#FF3811]'>Proceed Checkout</button></Link>
+                            <Link to={`/checkout/${loadedData._id}`}><button className='px-5 w-full rounded-md text-white py-2 bg-[#FF3811]'>Proceed Checkout</button></Link>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
 import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
+import BookingList from "../pages/BookingList";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -31,8 +32,14 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/${params.id}`)
             }, 
             {
-                path: '/checkout',
-                element: <Checkout />
+                path: '/checkout/:id',
+                element: <Checkout />,
+                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`)
+            },
+            {
+                path: '/booking',
+                element: <PrivateRoute><BookingList /></PrivateRoute>,
+
             }
         ]
     }
