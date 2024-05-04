@@ -7,16 +7,17 @@ import logo from '../assets/logo.svg'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaArrowRight } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 const ServiceDetails = () => {
     const { id } = useParams();
-    const [data, setData] = useState([])
+    const [loadedData, setLoadedData] = useState([])
     useEffect(() => {
-        axios.get(`http://localhost:5000/serviceDetails/${id}`)
-            .then(data => {
-                setData(data.data);
-            })
-    }, [id])
+        const getData = async () => {
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/serviceDetails/${id}`)
+            setLoadedData(data)
+        }
+        getData()
+    }, [])
     return (
         <div>
             <div className='relative'>
@@ -26,8 +27,8 @@ const ServiceDetails = () => {
             </div>
             <div className='flex flex-col md:flex-row justify-between items-center gap-5 lg:gap-20 mt-5 md:mt-8 lg:mt-16'>
                 <div className=' flex-1'>
-                    <img className='rounded-md' src={data.img} alt="" />
-                    <h1 className='text-2xl md:text-4xl lg:text-5xl font-semibold mt-3'>{data.title}</h1>
+                    <img className='rounded-md' src={loadedData.img} alt="" />
+                    <h1 className='text-2xl md:text-4xl lg:text-5xl font-semibold mt-3'>{loadedData.title}</h1>
                 </div>
                 <div className='p-5 bg-gray-200 flex-1 space-y-3 rounded-lg'>
                     <h3 className='text-lg md:text-xl font-bold'>Services</h3>
@@ -41,17 +42,17 @@ const ServiceDetails = () => {
             <div className='my-5 lg:my-10'>
                 <div className='grid grid-cols-1 lg:grid-cols-3 justify-between items-center gap-5 lg:gap-20'>
                     <div className='col-span-2 space-y-5'>
-                        <p>{data.description}</p>
+                        <p>{loadedData.description}</p>
                         <div className='grid grid-cols-2 gap-5 items-center'>
                             {/* {
-                            data?.facility.map((item, idx) =>
+                                loadedData?.facility.map((item, idx) =>
                                 
                             )
                             } */}
                             <div className='px-5 py-8 bg-[#F3F3F3] border-t-2 rounded-t-lg border-[#FF3811]'>
-                                    <h5 className='text-center text-sm md:text-lg font-semibold my-2'>{item.name}</h5>
-                                    <p className='text-center text-xs lg:text-sm'>{item.details}</p>
-                                </div>
+                                <h5 className='text-center text-sm md:text-lg font-semibold my-2'>24/7 Quality Service</h5>
+                                <p className='text-center text-xs lg:text-sm'>It uses a dictionary of over 200 Latin words, combined with a model sentence structures.</p>
+                            </div>
                             <div className='px-5 py-8 bg-[#F3F3F3] border-t-2 rounded-t-lg border-[#FF3811]'>
                                 <h5 className='text-center text-sm md:text-lg font-semibold my-2'>24/7 Quality Service</h5>
                                 <p className='text-center text-xs lg:text-sm'>It uses a dictionary of over 200 Latin words, combined with a model sentence structures.</p>
@@ -115,8 +116,8 @@ const ServiceDetails = () => {
                             </div>
                         </div>
                         <div className='space-y-3'>
-                            <h1 className='text-lg md:text-xl lg:text-2xl font-semibold'>Price: ${data.price}</h1>
-                            <button className='px-5 w-full rounded-md text-white py-2 bg-[#FF3811]'>Proceed Checkout</button>
+                            <h1 className='text-lg md:text-xl lg:text-2xl font-semibold'>Price: ${loadedData.price}</h1>
+                            <Link to={`/checkout`}><button className='px-5 w-full rounded-md text-white py-2 bg-[#FF3811]'>Proceed Checkout</button></Link>
                         </div>
                     </div>
                 </div>

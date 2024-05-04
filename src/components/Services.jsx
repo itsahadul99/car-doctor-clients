@@ -13,10 +13,11 @@ const Services = () => {
         //     .then(data => setServices(data))
 
         // using axios 
-        axios.get('http://localhost:5000/services')
-            .then(data => {
-                setServices(data.data)
-            })
+        const getData = async () => {
+            const { data } =await axios.get(`${import.meta.env.VITE_API_URL}/services`)
+            setServices(data)
+        }
+        getData()
     }, [])
     return (
         <div>
