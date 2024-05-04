@@ -3,9 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import login from '../assets/images/login/login.svg';
+import axios from "axios";
 
 const Login = () => {
-    const {Login} = useContext(AuthContext)
+    const { Login } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     const handleLogin = e => {
@@ -14,23 +15,31 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         Login(email, password)
-        .then(() => {
-            Swal.fire({
-                title: 'Successfully Logged in !',
-                text: 'Do you want to continue',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-              })
-            navigate(location?.state ? location?.state : '/')
-        })
-        .catch(error => {
-            Swal.fire({
-                title: `${error.message}`,
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-        })
+            .then(() => {
+                Swal.fire({
+                    title: 'Successfully Logged in !',
+                    text: 'Do you want to continue',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+                const user = { email }
+                //   console.log(user);
+                axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location?.state : '/')
+                        }
+                    })
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: 'Do you want to continue',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+            })
     }
     return (
         <section className='my-5'>
@@ -56,7 +65,7 @@ const Login = () => {
                             </div>
                             {/* Sign in Button */}
                             <button className="text-lg rounded-xl relative p-[10px] block w-full bg-[#ff3911ce] text-white border-y-4">
-                               Log In
+                                Log In
                             </button>
                         </form>
                         <p className="text-sm text-center gap-2 flex justify-center sm:px-6 mt-5 ">

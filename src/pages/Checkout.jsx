@@ -41,7 +41,7 @@ const Checkout = () => {
                                 text: "Your order received.",
                                 icon: "success"
                             });
-                            navigate('/')
+                            navigate('/booking')
                         }
                     })
 

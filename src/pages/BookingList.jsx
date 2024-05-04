@@ -51,7 +51,7 @@ const BookingList = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    {i?.price}
+                                    ${i?.price}
                                 </td>
                                 <td>{i?.date}</td>
                                 <th>
