@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import login from '../assets/images/login/login.svg';
-import axios from "axios";
+// import axios from "axios";
 
 const Login = () => {
     const { Login } = useContext(AuthContext)
@@ -22,15 +22,16 @@ const Login = () => {
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 })
-                const user = { email }
+                navigate(location?.state ? location?.state : '/')
+                // const user = { email }
                 //   console.log(user);
-                axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.success) {
-                            navigate(location?.state ? location?.state : '/')
-                        }
-                    })
+                // axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user, { withCredentials: true })
+                //     .then(res => {
+                //         console.log(res.data);
+                //         if (res.data.success) {
+                            
+                //         }
+                //     })
             })
             .catch(error => {
                 Swal.fire({

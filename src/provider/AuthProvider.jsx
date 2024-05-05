@@ -2,6 +2,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -22,8 +23,19 @@ const AuthProvider = ({children}) => {
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setLoading(false)
+            const LoggedEmail =currentUser?.email ||  user?.email;
+            const loggedUser = {email: LoggedEmail}
             setUser(currentUser)
+            setLoading(false)
+            // get token when currentUser have 
+            if(currentUser){
+                axios.post(`${import.meta.env.VITE_API_URL}/jwt`,loggedUser, { withCredentials: true })
+                .then(res => console.log(res.data))
+            }
+            else{
+                axios.post(`${import.meta.env.VITE_API_URL}/logout`,loggedUser, { withCredentials: true })
+                .then(res => console.log(res.data))
+            }
             return () => {
                 unsubscribe();
             }

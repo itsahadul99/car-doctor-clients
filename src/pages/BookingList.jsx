@@ -8,12 +8,11 @@ const BookingList = () => {
     const [displayData, setDisplayData] = useState([])
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios(`${import.meta.env.VITE_API_URL}/checkout?email=${user?.email}`)
+            const { data } = await axios(`${import.meta.env.VITE_API_URL}/checkout?email=${user?.email}`, {withCredentials: true})
             setDisplayData(data)
         }
         getData()
     }, [])
-
 
     return (
         <div>
