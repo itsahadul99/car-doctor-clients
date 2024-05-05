@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import login from '../assets/images/login/login.svg';
-import { useContext } from 'react';
-import { AuthContext } from '../provider/AuthProvider';
+// import { useContext } from 'react';
+// import { AuthContext } from '../provider/AuthProvider';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 const Signin = () => {
-    const {createUser} = useContext(AuthContext)
+    // const {createUser} = useContext(AuthContext)
+    const {createUser} = useAuth()
     const navigate = useNavigate()
     const handleForm = e => {
         e.preventDefault()
