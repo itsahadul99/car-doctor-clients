@@ -8,6 +8,7 @@ import ServiceDetails from "../pages/ServiceDetails";
 import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
 import BookingList from "../pages/BookingList";
+import About from "../components/About";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -27,14 +28,18 @@ const router = createBrowserRouter([
                 element: <Signin />
             },
             {
+                path: '/about',
+                element: <About />
+            },
+            {
                 path: '/serviceDetails/:id',
                 element: <PrivateRoute><ServiceDetails /></PrivateRoute>,
-                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/${params.id}`)
-            }, 
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/${params.id}`)
+            },
             {
                 path: '/checkout/:id',
                 element: <Checkout />,
-                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`)
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`)
             },
             {
                 path: '/booking',

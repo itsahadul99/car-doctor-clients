@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Zoom } from "react-awesome-reveal";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -14,7 +15,7 @@ const Services = () => {
 
         // using axios 
         const getData = async () => {
-            const { data } =await axios.get(`${import.meta.env.VITE_API_URL}/services`)
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/services`)
             setServices(data)
         }
         getData()
@@ -28,24 +29,28 @@ const Services = () => {
             </div>
             <div className="my-5 md:my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 justify-center items-center">
                 {
-                    services.map(service => <div key={service._id}>
-                        <div className="card md:w-96 border rounded-lg">
-                            <figure className="p-5 ">
-                                <img className="w-[300px] h-[250px] rounded-md" src={service.img} alt={service.title} />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">
-                                    {service.title}
-                                </h2>
-                                <div className="flex justify-between items-center text-[#FF3811]">
-                                    <p className="text-sm md:text-lg font-semibold">Price: ${service.price}</p>
-                                    <Link to={`/serviceDetails/${service._id}`}>
-                                        <FaArrowRight />
-                                    </Link>
+                    services.map(service =>
+                        <Zoom key={service._id} duration={1200}>
+                            <div>
+                                <div className="card md:w-96 border rounded-lg">
+                                    <figure className="p-5 ">
+                                        <img className="w-[300px] h-[250px] rounded-md" src={service.img} alt={service.title} />
+                                    </figure>
+                                    <div className="card-body">
+                                        <h2 className="card-title">
+                                            {service.title}
+                                        </h2>
+                                        <div className="flex justify-between items-center text-[#FF3811]">
+                                            <p className="text-sm md:text-lg font-semibold">Price: ${service.price}</p>
+                                            <Link to={`/serviceDetails/${service._id}`}>
+                                                <FaArrowRight />
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>)
+                        </Zoom>
+                    )
                 }
             </div>
             <div className="flex justify-center mb-5">

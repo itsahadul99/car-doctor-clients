@@ -1,11 +1,10 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/logo.svg'
 import { FaSearch } from "react-icons/fa";
-import { useContext } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 const Nav = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut } = useAuth()
     const navigate = useNavigate()
     const handleLogOut = () => {
         logOut()

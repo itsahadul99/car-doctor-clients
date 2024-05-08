@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../provider/AuthProvider";
 import login from '../assets/images/login/login.svg';
+import useAuth from "../hooks/useAuth";
 // import axios from "axios";
 
 const Login = () => {
-    const { Login } = useContext(AuthContext)
+    const {Login} = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
     const handleLogin = e => {
@@ -23,15 +22,6 @@ const Login = () => {
                     confirmButtonText: 'Ok'
                 })
                 navigate(location?.state ? location?.state : '/')
-                // const user = { email }
-                //   console.log(user);
-                // axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user, { withCredentials: true })
-                //     .then(res => {
-                //         console.log(res.data);
-                //         if (res.data.success) {
-                            
-                //         }
-                //     })
             })
             .catch(error => {
                 Swal.fire({

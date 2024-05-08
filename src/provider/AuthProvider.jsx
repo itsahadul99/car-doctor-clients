@@ -30,17 +30,17 @@ const AuthProvider = ({children}) => {
             // get token when currentUser have 
             if(currentUser){
                 axios.post(`${import.meta.env.VITE_API_URL}/jwt`,loggedUser, { withCredentials: true })
-                .then(res => console.log(res.data))
+                .then()
             }
             else{
                 axios.post(`${import.meta.env.VITE_API_URL}/logout`,loggedUser, { withCredentials: true })
-                .then(res => console.log(res.data))
+                .then()
             }
             return () => {
                 unsubscribe();
             }
         })
-    }, [])
+    }, [user])
 
     const authInfo = {
         user,

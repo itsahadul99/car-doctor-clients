@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const BookingList = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
     const [displayData, setDisplayData] = useState([])
     useEffect(() => {
         const getData = async () => {
@@ -13,7 +13,18 @@ const BookingList = () => {
         }
         getData()
     }, [])
-
+    const handleDelete = id => {
+        axios.delete(`${import.meta.env.VITE_API_URL}/checkout/${id}`)
+        .then(data => {
+            if(data.data.deletedCount > 0){
+                const remaining = displayData.filter(i => i._id !== id)
+                setDisplayData(remaining)
+            }
+        })
+    }
+    const handleBookingConfirm = id => {
+        
+    }
     return (
         <div>
             <div className="overflow-x-auto">
@@ -33,7 +44,7 @@ const BookingList = () => {
                         {
                             displayData.map(i => <tr key={i._id}>
                                 <th>
-                                    <button className="btn btn-circle btn-outline">
+                                    <button onClick={() => handleDelete(i._id)} className="btn btn-circle btn-outline">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                     </button>
                                 </th>
@@ -54,7 +65,7 @@ const BookingList = () => {
                                 </td>
                                 <td>{i?.date}</td>
                                 <th>
-                                    <button className="btn btn-ghost btn-xs">Pending</button>
+                                    <button onClick={()=> handleBookingConfirm(i._id)} className="btn btn-ghost btn-xs bg-[#ff3911ce] text-white px-5">Pending</button>
                                 </th>
                             </tr>)
                         }

@@ -15,6 +15,7 @@ const PopularProduct = () => {
                 <p className="text-sm md:text-lg text-[#737373] text-center">The majority have suffered alteration in some form, by injected humour, or randomised <br /> words which don't look even slightly believable. </p>
             </div>
             <div className="my-5 md:my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 justify-center items-center">
+
                 <div className="card md:w-96 border p-5">
                     <figure className="px-10 py-5 bg-[#F3F3F3] rounded-xl">
                         <img src={product1} alt="Car Engine plug" className='w-[150px] h-[150px]' />
@@ -30,6 +31,7 @@ const PopularProduct = () => {
                         <p className="text-sm md:text-lg font-semibold">$20.00</p>
                     </div>
                 </div>
+
                 <div className="card md:w-96 border p-5">
                     <figure className="px-10 pt-10   py-5 bg-[#F3F3F3] rounded-xl">
                         <img src={product2} alt="Car Engine plug" className='w-[150px] h-[150px]' />

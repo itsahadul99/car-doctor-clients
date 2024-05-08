@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
+import { Zoom } from 'react-awesome-reveal';
 const ServiceDetails = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState([])
@@ -27,16 +28,58 @@ const ServiceDetails = () => {
             </div>
             <div className='flex flex-col md:flex-row justify-between items-center gap-5 lg:gap-20 mt-5 md:mt-8 lg:mt-16'>
                 <div className=' flex-1'>
-                    <img className='rounded-md' src={loadedData.img} alt="" />
+                    <Zoom duration={1300}>
+                        <img className='rounded-md' src={loadedData.img} alt="" />
+                    </Zoom>
                     <h1 className='text-2xl md:text-4xl lg:text-5xl font-semibold mt-3'>{loadedData.title}</h1>
                 </div>
-                <div className='p-5 bg-gray-200 flex-1 space-y-3 rounded-lg'>
+                <div
+                    data-aos="fade-left"
+                    data-aos-duration="2000"
+                    className='p-5 bg-gray-200 flex-1 space-y-3 rounded-lg'>
                     <h3 className='text-lg md:text-xl font-bold'>Services</h3>
-                    <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-[#FF3811] text-white font-semibold text-lg'>Battery Charge<FaArrowRight size={20} /> </h2>
-                    <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Engine Repair<FaArrowRight size={20} /> </h2>
+                    <h2
+                        className={loadedData.title === 'Full car Repair' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Full car Repair<FaArrowRight size={20} />
+
+                    </h2>
+                    <h2
+                        className={loadedData.title === 'Battery Charge' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Battery Charge<FaArrowRight size={20} />
+
+                    </h2>
+                    <h2
+                        className={loadedData.title === 'Engine Repair' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Engine Repair<FaArrowRight size={20} />
+
+                    </h2>
+                    <h2
+                        className={loadedData.title === 'Engine Oil Change' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Engine Oil Change<FaArrowRight size={20} />
+
+                    </h2>
+                    <h2
+                        className={loadedData.title === 'Automatic Services' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Automatic Services<FaArrowRight size={20} />
+
+                    </h2>
+                    <h2
+                        className={loadedData.title === 'Electrical System' ? 'bg-[#FF3811] py-3 px-5 rounded-lg flex justify-between items-center text-white font-semibold text-lg' : 'py-3 px-5 rounded-lg flex justify-between items-center text-black font-semibold text-lg bg-white'}
+                    >
+                        Electrical System<FaArrowRight size={20} />
+
+                    </h2>
+
+
+                    {/* <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Engine Repair<FaArrowRight size={20} /> </h2>
                     <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Automatic Services <FaArrowRight size={20} /> </h2>
                     <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Engine Oil Change <FaArrowRight size={20} /> </h2>
-                    <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Electrical System<FaArrowRight size={20} /> </h2>
+                    <h2 className='py-3 px-5 rounded-lg flex justify-between items-center bg-white text-black font-semibold text-lg'>Electrical System<FaArrowRight size={20} /> </h2> */}
                 </div>
             </div>
             <div className='my-5 lg:my-10'>
@@ -71,7 +114,10 @@ const ServiceDetails = () => {
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </p>
                     </div>
                     <div className='space-y-5'>
-                        <div className='p-5 bg-[#151515] rounded-md text-white space-y-3 lg:space-y-5 mx-auto md:mx-0'>
+                        <div
+                            data-aos="flip-left"
+                            data-aos-duration="1500"
+                            className='p-5 bg-[#151515] rounded-md text-white space-y-3 lg:space-y-5 mx-auto md:mx-0'>
                             <h3 className='text-lg lg:text-xl font-semibold'>Download</h3>
                             <div className='flex gap-3 justify-between items-center'>
                                 <div className='flex gap-5 items-center'>
@@ -102,7 +148,10 @@ const ServiceDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='p-5 bg-[#151515] rounded-md text-white space-y-3 lg:space-y-5 pb-5 md:pb-10 mx-auto md:mx-0'>
+                        <div
+                            data-aos="flip-right"
+                            data-aos-duration="2000"
+                            className='p-5 bg-[#151515] rounded-md text-white space-y-3 lg:space-y-5 pb-5 md:pb-10 mx-auto md:mx-0'>
                             <img className='mx-auto text-white' src={logo} alt="" />
                             <h3 className='text-sm md:text-lg font-semibold md:w-1/2 mx-auto text-center'>Need Help? We Are Here
                                 To Help You
